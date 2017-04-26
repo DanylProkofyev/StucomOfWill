@@ -15,8 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 
 public class Usuario implements Serializable {
 
@@ -36,8 +36,15 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    //@JoinColumn(name = "pass", referencedColumnName = "nombre")
-    //TODO @OneToMany(optional = false)
-    
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "contra")
+    private String contra;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "points")
+    private int points;
+    @JoinColumn(name = "ruler", referencedColumnName = "idruler")
+    private int ruler;
 
 }
