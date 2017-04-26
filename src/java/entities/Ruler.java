@@ -44,8 +44,6 @@ public class Ruler {
     private String nombre;
     @Column(name = "efecto")
     private String efecto;
-    @Column(name = "efecto2" )
-    private String efecto2;
 
 
 
