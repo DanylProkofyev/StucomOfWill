@@ -45,8 +45,6 @@ public class Ruler {
     @Column(name = "efecto")
     private String efecto;
 
-
-
     public Ruler(){
     }
 
