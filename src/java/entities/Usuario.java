@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,15 +30,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-@NamedQuery(name = "Usuario.findByPuntos", query = "SELECT u FROM Usuario u"),
-@NamedQuery(name = "Trainer.findAllOrder", query = "SELECT u FROM Usuario u order by u.puntos desc")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    ,@NamedQuery(name = "Usuario.findByPuntos", query = "SELECT u FROM Usuario u WHERE u.puntos = :puntos")
+    ,@NamedQuery(name = "Trainer.findAllOrder", query = "SELECT u FROM Usuario u order by u.puntos desc")})
 
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
@@ -54,6 +57,13 @@ public class Usuario implements Serializable {
     private Collection<Cartas> coleccionCartas;
 
     public Usuario() {
+    }
+
+    public Usuario(String nombre, String contra, int puntos, int ruler) {
+        this.nombre = nombre;
+        this.contra = contra;
+        this.puntos = puntos;
+        this.ruler = ruler;
     }
 
     public String getNombre() {
