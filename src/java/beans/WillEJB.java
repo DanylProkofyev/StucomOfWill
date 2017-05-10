@@ -9,6 +9,8 @@ import entities.Usuario;
 import entities.Batalla;
 import entities.Ruler;
 import entities.Cartas;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +27,15 @@ public class WillEJB {
     // "Insert Code > Add Business Method")
     @PersistenceUnit
     EntityManagerFactory emf;
+//TODO
+//    public List<Ruler> selectRulers() {
+//        List<Ruler> todos = emf.createEntityManager().createNamedQuery("Ruler.findAll").getResultList();
+//        List<Ruler> entrena = new ArrayList<>();
+//        todos.stream().filter((entrenadorAhora) -> (entrenadorAhora).forEachOrdered((entrenadorAhora) -> {
+//            entrena.add(entrenadorAhora);
+//        });
+//        return entrena;
+//    }
 
     public boolean insertarUsuario(Usuario t) {
         if (!existeUsuario(t)) {
@@ -42,6 +53,5 @@ public class WillEJB {
         em.close();
         return usuarioEncontrado != null;
     }
-    
-    
+
 }

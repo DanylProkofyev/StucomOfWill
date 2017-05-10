@@ -6,9 +6,11 @@
 package servlets;
 
 import beans.WillEJB;
+import entities.Ruler;
 import entities.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,10 +39,7 @@ public class InsertarUsuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nombre = request.getParameter("nombre");
-        String contra = request.getParameter("contra");
-        int ruler = Integer.parseInt(request.getParameter("ruler"));
-        Usuario u = new Usuario(nombre, contra, 0, ruler);
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -50,11 +49,37 @@ public class InsertarUsuario extends HttpServlet {
             out.println("<title>Servlet InsertarUsuario</title>");
             out.println("</head>");
             out.println("<body>");
-            if (ejb.insertarUsuario(u)) {
-                out.println("<div>Usuario dado de alta</div>");
-            } else {
-                out.println("<div>Usuario ya existe</div>");
-            }
+            out.println("<title>Servlet AltaPokemon</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<form action=\"PokemonFuncion\" method=\"GET\">");
+            out.println("<p><label>nombre</label></p>");
+            out.println("<input type=\"text\" name=\"nombre\">");
+            out.println("<p><label>tipo</label></p>");
+            out.println("<input type=\"text\"  name=\"tipo\">");
+            out.println("<p><label>habilidad</label></p>");
+            out.println("<input type=\"text\"  name=\"habilidad\">");
+            out.println("<p><label>ataque</label></p>");
+            out.println("<input type=\"number\" name=\"ataque\">");
+            out.println("<p><label>defensa</label></p>");
+            out.println("<input type=\"number\" name=\"defensa\">");
+            out.println("<p><label>velocidad</label></p>");
+            out.println("<input type=\"number\" name=\"velocidad\">");
+            out.println("<p><label>vida</label></p>");
+            out.println("<input type=\"number\" name=\"vida\">");
+            out.println("<p><label>entrenador</label></p>");
+            out.println("<select name=\"entrenador\">");
+//            try {
+//                List<Ruler> todosRulers = ejb.selectRulers();
+//                for (Ruler rulerAhora : todosRulers) {
+//                    out.println("<option value=" + rulerAhora.getNombre() + ">" + rulerAhora.getNombre() + "</option>");
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            out.println("</select>");
+            out.println("<input type=\"submit\" value=\"ok\">");
+            out.println("</form>");
             out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
